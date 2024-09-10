@@ -6,13 +6,32 @@
 <h1>Contact</h1>
 
 <p role="status">Current count: @currentCount</p>
-
+<div class="d-flex flex-column gap-2">
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 <button class="btn btn-primary" @onclick="LinkedInConnect">LinkedIn</button>
 <button class="btn btn-primary" @onclick="GithubConnect">Github</button>
+<button class="btn btn-primary" @onclick="EmailConntect">Email</button>
+</div>
+<div class="m-4">
+    <input type="text" @bind="text" @bind:event="oninput"/>
+    <p>@text </p>
+</div>
 
+@* <div style="border:1px solid black;" @onmouseover="MouseOVer">
+    <p>@divText</p>
+</div> *@
+
+@* 
+<div class="m-4">
+    <input type="text" @onfocus="HandleOnFoucs" onblur="ohblurr"/>
+    <p>@textme</p>
+</div>
+ *@
 @code {
     private int currentCount = 0;
+    string text = ""; 
+    string divText = "";
+    string textme = "";
     [Parameter]
     public int incrementAmount { get; set; } = 100;
     // هنا انا بعمل انجيكت علشان اوصل لل النفجيت مانجير 
@@ -29,6 +48,35 @@
     private void GithubConnect()
     {
         navigationManager.NavigateTo("https://github.com/mahmoudshaddad");
+
+    }
+    private void EmailConntect()
+    {
+        navigationManager.NavigateTo("mailto:mahmoudshaddad0@gmail.com");
+
+    }
+    private void HandleInput(ChangeEventArgs e)
+    {
+        text = (string)e.Value!;
+    }
+    private void MouseOVer(MouseEventArgs e)
+    {
+        divText= "you are over this";
+
+    }
+    private void HandlekeyDown(KeyboardEventArgs e)
+    {
+        text= e.Key;
+
+    }
+    private void HandleOnFoucs(FocusEventArgs e)
+    {
+        textme = "You are typing.... here";
+
+    }
+    private void ohblurr(FocusEventArgs e)
+    {
+        textme = "You are not typing.... why you clicked away";
 
     }
 }
